@@ -1,0 +1,9 @@
+p{
+    font-size: 15px;
+}
+@media screen and (max-with: 768px) {
+    p{
+        font-size: calc(10px+2.5vw);
+    }
+    
+}
