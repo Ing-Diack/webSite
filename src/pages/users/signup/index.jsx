@@ -26,9 +26,10 @@ function Signup() {
         e.preventDefault();
         axios.post('http://localhost:3000/api/auth/signup',userThing)
         .then(res=>{
-                setBoxMessage("Votre Compte a été bien crée !");
+                console.log(res);
+                setBoxMessage(res.data.message);
                 setTypeMessage('success');
-                navigate(state?.path ||"/");
+                
         })
         .catch(error=>{
             console.log(error);
