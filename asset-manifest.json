@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/webSite/static/css/main.61f34341.css",
-    "main.js": "/webSite/static/js/main.ac75a0f3.js",
+    "main.js": "/webSite/static/js/main.0c098c77.js",
     "static/media/carousel1.jpg": "/webSite/static/media/carousel1.fbf12697d8efa06ee664.jpg",
     "static/media/carousel2.jpg": "/webSite/static/media/carousel2.029637872dc598d68654.jpg",
     "static/media/cafe3.jpg": "/webSite/static/media/cafe3.2ee03378e59e07e3dca5.jpg",
@@ -12,10 +12,10 @@
     "static/media/ABKF_TECH.png": "/webSite/static/media/ABKF_TECH.2b26b9e6e6dbd41cac70.png",
     "index.html": "/webSite/index.html",
     "main.61f34341.css.map": "/webSite/static/css/main.61f34341.css.map",
-    "main.ac75a0f3.js.map": "/webSite/static/js/main.ac75a0f3.js.map"
+    "main.0c098c77.js.map": "/webSite/static/js/main.0c098c77.js.map"
   },
   "entrypoints": [
     "static/css/main.61f34341.css",
-    "static/js/main.ac75a0f3.js"
+    "static/js/main.0c098c77.js"
   ]
 }
