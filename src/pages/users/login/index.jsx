@@ -2,7 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-import AuthConsummer from '../../../utils/context'
+import { setUserSession } from '../../../utils/context'
+import { Loader } from '../../../utils/css/atom'
 
 
 
@@ -10,9 +11,8 @@ import AuthConsummer from '../../../utils/context'
 
 function Login() {
     const navigate =useNavigate();
-  //  const [isLoading,setIsLoading] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
     const [boxMessage, setBoxMessage]=useState('');
-    const {login}=AuthConsummer();
     const [typeMessage, setTypeMessage] = useState('');
     const [userThing , setUserThing]= useState({
         email:'',
@@ -26,14 +26,16 @@ function Login() {
     
     const  handleLogin =(e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3000/api/auth/login',userThing)
+        setIsLoading(true);
+        axios.post('https://server-codebrah.onrender.com/api/auth/login', userThing)
         .then(res=>{
-                login(res.data.username).then(()=>{
-                setBoxMessage(res.data.message);
-                setTypeMessage('success');
-                navigate("/");
-                });})
+           console.log(res.data);
+           setIsLoading(false);
+            setUserSession(res.data.token,res.data.user);
+                navigate("/");  
+                })
         .catch(error=>{
+            setIsLoading(false);
             setBoxMessage(error.response.data.message);
                 setTypeMessage('danger');
              });
@@ -87,7 +89,7 @@ function Login() {
                 </div>
                 <div className="mt-4">
                    <button type='submit'  className='btn-sm btn-primary w-100 rounded-pill' >
-                    se connecter
+                    {isLoading ? <Loader/> : 'se connecter'}
                     </button>
                 </div>
             </form>

@@ -1,22 +1,21 @@
-import React from 'react'
 import logo from './../../assets/ABKF_TECH.png'
 import { Link, useNavigate } from 'react-router-dom'
-import AuthConsummer from '../../utils/context'
 import { HashLink } from 'react-router-hash-link/dist/react-router-hash-link.cjs.development'
-
+import { getUser,getToken , removeUserSession} from '../../utils/context'
 function Header() {
   const navigate = useNavigate();
 
-    const {authed, logout,userName} = AuthConsummer();
   const handleLogout=(e)=>{
     e.preventDefault();
-    logout();
+    removeUserSession();
     navigate('/');
   }
+ 
+  
 
   return (
-   <header className='mb-5'>
-    <nav className='navbar navbar-expand-md  navbar-dark fixed-top fw-bold text-white ' 
+   <header>
+    <nav className='navbar navbar-expand-md  navbar-dark  fw-bold text-white ' 
        style={{
         backgroundColor:'#4A6373'
       }}>
@@ -47,14 +46,10 @@ function Header() {
                 <HashLink to='#section5' className="nav-link">Contact</HashLink>
                 </li>
                 <li className="nav-item m-md-2"> 
-                  {authed ? (
-                       <button onClick={handleLogout} type='button' className='btn-sm btn-primary rounded-5 ' data-bs-toggle="tooltip" title='Logout'> 
-                        <i className="fa fa-user" data-bs-toggle="tooltip" title='Logout'></i>  {userName}</button>
-                  ):(<Link to="/login" className="btn btn-primary rounded-pill">
-                    <i className="fa fab fa-user" data-bs-toggle="tooltip" title='Login'></i>
-                    </Link> )}
-                  
-              
+                  {getToken() ? (<Link onClick={handleLogout} className="btn btn-primary rounded-pill"data-bs-toggle="tooltip" title='LogOut'>
+                    <i className="fa fab fa-user" ></i> {getUser().username}
+                    </Link> 
+                  ):(<Link to='/login' className='nav-link border-2 p-2 bg-light text-dark rounded-pill'  >Log In </Link> )}   
                 </li>
               </ul>
             </div>
