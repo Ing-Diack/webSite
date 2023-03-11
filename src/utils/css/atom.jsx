@@ -9,7 +9,7 @@ const rotate = keyframes`
   }
 `
 
-export const Loader = styled.div`
+const LoaderDisplay = styled.div`
   padding: 10px;
   border: 6px solid red;
   border-bottom-color: transparent;
@@ -18,3 +18,14 @@ export const Loader = styled.div`
   height: 0;
   width: 0;
 `
+const LoaderWrap = styled.div`
+display:flex;
+justify-content:center;
+`
+
+export const Loader = ()=>{
+return ( <LoaderWrap> 
+            <LoaderDisplay/>
+        </LoaderWrap>)
+
+}

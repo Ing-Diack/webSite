@@ -2,10 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
 import { Link} from 'react-router-dom';
-
+import { Loader } from '../../../utils/css/atom';
 function Signup() {
     const [boxMessage, setBoxMessage]=useState('');
     const [typeMessage, setTypeMessage] = useState('');
+    const [isLoading,setIsLoading]=useState(false);
     const [userThing , setUserThing]= useState({
         username:'',
         email:'',
@@ -22,15 +23,16 @@ function Signup() {
 
     const  handleSignup =(e)=>{
         e.preventDefault();
+        setIsLoading(true);
         axios.post('https://server-codebrah.onrender.com/api/auth/signup',userThing)
         .then(res=>{
-                console.log(res);
+                setIsLoading(false);
                 setBoxMessage(res.data.message);
                 setTypeMessage('success');
             
         })
         .catch(error=>{
-            console.log(error);
+            setIsLoading(false);
             setBoxMessage(error.response.data.message);
            setTypeMessage('danger')
            
@@ -82,8 +84,14 @@ function Signup() {
                                 />
                                 <label htmlFor="password"><i className="fa fa-lock"></i> Password * </label>
                             </div>
+                            <div className="text-end">
+                                <Link to='/login'>se connecter ?</Link>
+                            </div>
                             <div className=" form-floating mt-4">
-                               <button  className='btn-sm btn-primary w-100 rounded-pill'>S'INSCRIRE</button>
+                                {isLoading? <Loader/>:
+                                <button  className='btn-sm btn-primary w-100 rounded-pill'>S'INSCRIRE</button>
+                                }
+              
                             </div>
                         </form>
                     </div>
