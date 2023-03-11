@@ -88,9 +88,10 @@ function Login() {
                     <Link to="/signup">s'inscrire ?</Link>
                 </div>
                 <div className="mt-4">
-                   <button type='submit'  className='btn-sm btn-primary w-100 rounded-pill' >
-                    {isLoading ? <Loader/> : 'se connecter'}
-                    </button>
+                  
+                    {isLoading ? <Loader/> : 
+                     <button type='submit'  className='btn-sm btn-primary w-100 rounded-pill' >connectez</button>}
+                    
                 </div>
             </form>
                         </div>

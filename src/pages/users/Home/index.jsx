@@ -10,11 +10,12 @@ import carousel2 from './../../../assets/carousel1.jpg';
 import carousel3 from './../../../assets/carousel2.jpg';
 import CardProjet from '../../../components/CardProjet';
 import Competence from '../../../components/Competence';
-
+import { Loader } from '../../../utils/css/atom';
 function Home() {
 
   const [typeMessage,setTypeMessage]= useState('');
   const [boxMessage,setBoxMessage] = useState('');
+  const [isLoading,setIsLoading]= useState(false);
   const [userThing, setUserThing]= useState({
     surName :'',
     name :'',
@@ -37,6 +38,7 @@ const resetForm =()=>{
     }
     const handleContact = (e) =>{
       e.preventDefault();
+      setIsLoading(true);
       const headers = {
          'Content-Type':'application/json',
           'Authorization':`Bearer ${getToken()? getToken() :null}`
@@ -44,13 +46,13 @@ const resetForm =()=>{
       }
       axios.post('https://server-codebrah.onrender.com/api/auth/contact',userThing,{headers})
       .then(res =>{
-        console.log(res);
+        setIsLoading(false);
         setBoxMessage(res.data.message);
         setTypeMessage('success');
 
       })
       .catch(error => {
-        console.log(error);
+       setIsLoading(false);
         setBoxMessage(`${error.response.data.message }`);
         setTypeMessage('danger');
       })
@@ -214,7 +216,7 @@ const resetForm =()=>{
           </div>
           <div className="col-12 col-md-6 offset-md-1">
           <form action="" onSubmit={handleContact}>
-            <div className={`alert alert-${typeMessage} text-center py-2 py-md-3`} role="alert">
+            <div className={`alert alert-${typeMessage} text-center py-1 py-md-2`} role="alert">
               {boxMessage} {typeMessage ==='danger' && <Link to="/login">connectez-vous</Link>}
             </div>
             <div className="row">
@@ -254,7 +256,9 @@ const resetForm =()=>{
             </div>
             <div className="row mt-2">
               <div className="col-12">
-                <button type='submit' className='btn btn-primary w-100'>Envoyer</button>
+                {isLoading? <Loader/>:
+                 <button type='submit' className='btn btn-primary w-100'>Envoyer</button>
+                }    
               </div>
             </div>
           </form>
