@@ -1,13 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
-import { Link,useLocation, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 function Signup() {
     const [boxMessage, setBoxMessage]=useState('');
     const [typeMessage, setTypeMessage] = useState('');
-    const navigate = useNavigate();
-    const {state}= useLocation();
     const [userThing , setUserThing]= useState({
         username:'',
         email:'',
@@ -24,12 +22,11 @@ function Signup() {
 
     const  handleSignup =(e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3000/api/auth/signup',userThing)
+        axios.post('https://server-codebrah.onrender.com/api/auth/signup',userThing)
         .then(res=>{
                 console.log(res);
                 setBoxMessage(res.data.message);
                 setTypeMessage('success');
-                
         })
         .catch(error=>{
             console.log(error);

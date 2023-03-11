@@ -1,4 +1,5 @@
 const User = require('./../models/user');
+const Contact = require('./../models/contact');
 const  bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -38,8 +39,7 @@ exports.login = (req,res,next)=>{
                     return res.status(400).json({message:'Please your password or email is incorrect'});
                 }else{
                     res.status(200).json({
-                        userId : user._id,
-                        username:user.username,
+                        user,
                         message:"Your connection has been made successfully",
                         token : jwt.sign({useId : user._id},
                                             'RANDOM_TOKEN_SECRET',
@@ -51,4 +51,22 @@ exports.login = (req,res,next)=>{
         }
     })
     .catch(error => res.status(500).json({error}));
+}
+
+exports.contact = (req,res,next) =>{
+    User.findOne({email: req.body.email})
+    .then(user =>{
+        if(!user){
+            return res.status(404).json({message:'Veuillez vous contacter pour pouvoir envoyer le message'});
+        }else {
+            const contact = new Contact({
+                ...req.body,
+                userId : user._id
+            });
+            contact.save()
+            .then(()=>res.status(200).json({message:'Votre message est bien enregistre'}))
+            .catch(error => res.status(500).json({error}));
+        }
+    })
+    .catch(error => res.status(500).json({error}))
 }

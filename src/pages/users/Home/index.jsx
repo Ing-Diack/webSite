@@ -1,20 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 import carousel1  from './../../../assets/carousel4.jpg';
 import cafe  from './../../../assets/cafe3.jpg';
 import code1  from './../../../assets/code1.jpg';
 import diack  from './../../../assets/diack.jpg';
 import { Link } from 'react-router-dom';
-
+import {getToken } from '../../../utils/context';
 import carousel2 from './../../../assets/carousel1.jpg';
 import carousel3 from './../../../assets/carousel2.jpg';
 import CardProjet from '../../../components/CardProjet';
 import Competence from '../../../components/Competence';
 
 function Home() {
+
+  const [typeMessage,setTypeMessage]= useState('');
+  const [boxMessage,setBoxMessage] = useState('');
+  const [userThing, setUserThing]= useState({
+    surName :'',
+    name :'',
+    email:'',
+    message : ''
+})
+console.log(userThing)
+const resetForm =()=>{
+  setUserThing({
+    surName:'',
+    name:'',
+    email:'',
+    message:''
+  });
+}
     const background = {
       backgroundImage:`url(${carousel1})`,
       height:'75vh',
       backgroundRepeat:'no-repeat'
+    }
+    const handleContact = (e) =>{
+      e.preventDefault();
+      const headers = {
+         'Content-Type':'application/json',
+          'Authorization':`Bearer ${getToken()? getToken() :null}`
+         
+      }
+      axios.post('https://server-codebrah.onrender.com/api/auth/contact',userThing,{headers})
+      .then(res =>{
+        console.log(res);
+        setBoxMessage(res.data.message);
+        setTypeMessage('success');
+
+      })
+      .catch(error => {
+        console.log(error);
+        setBoxMessage(`${error.response.data.message }`);
+        setTypeMessage('danger');
+      })
+      resetForm();
+    }
+
+    const onChange = (e)=>{
+      setUserThing({
+        ...userThing,
+        [e.target.name]: e.target.value
+      })
+
     }
 
   
@@ -90,7 +138,7 @@ function Home() {
                       </small></p>
            </div>
            <div className="col-12 col-md-4 offset-md-1 justify-content-center">
-            <img src={diack} alt=""  className='w-100 rounded-3 moi'/>
+            <img src={diack} alt=""  className='img-fluid w-100 rounded-3 moi'/>
            </div>
           </div>
         </div>
@@ -131,23 +179,23 @@ function Home() {
           />
 
 <CardProjet  
-          title="projet1"
-          picture={carousel1}
+          title="projet2"
+          picture={carousel3}
           description="Un projet vraiment prometeur 
                       il faut faire pour participer à ce projet "
                       lien="https://github.com/Ing-Diack/diackalia.git"
           />
 
 <CardProjet  
-          title="projet1"
-          picture={carousel1}
+          title="projet3"
+          picture={carousel2}
           description="Un projet vraiment prometeur 
                       il faut faire pour participer à ce projet "
                       lien="https://github.com/Ing-Diack/diackalia.git"
           />
 
 <CardProjet  
-          title="projet1"
+          title="projet4"
           picture={carousel1}
           description="Un projet vraiment prometeur 
                       il faut faire pour participer à ce projet "
@@ -165,32 +213,48 @@ function Home() {
             <img src={cafe} alt="" className='w-100 rounded-3 shadow-lg'/>
           </div>
           <div className="col-12 col-md-6 offset-md-1">
-          <form action="">
+          <form action="" onSubmit={handleContact}>
+            <div className={`alert alert-${typeMessage} text-center py-2 py-md-3`} role="alert">
+              {boxMessage} {typeMessage ==='danger' && <Link to="/login">connectez-vous</Link>}
+            </div>
             <div className="row">
               <div className="col-6">
                 <label htmlFor="name" className='form-label'>Nom</label>
-                <input type="text" name='name' className='form-control' />
+                <input type="text" name='name' id='name' className='form-control' 
+                value={userThing.name}
+                onChange={onChange}
+                />
               </div>
               <div className="col-6">
               <label htmlFor="surName" className='form-label'>Prenom</label>
-                <input type="text" name='surName' className='form-control' />
+                <input type="text" name='surName' id='surName' className='form-control' 
+                value={userThing.surName}
+                onChange={onChange}
+                />
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-12">
               <label htmlFor="email" className='form-label'>Address Mail</label>
-                <input type="text" name='email' className='form-control' />
+                <input type="text" name='email' id='email' className='form-control' 
+                placeholder={getToken() ? 'saisissez votre @mail' : ``}
+                value = {userThing.email}
+                onChange={onChange}
+                />
               </div>
             </div>
             <div className="row mt-2 ">
               <div className="col-12">
-                <label htmlFor="textAreaName">Message</label>
-                <textarea name="textAreaName" id="" className='form-control' rows="4"></textarea>
+                <label htmlFor="message">Message</label>
+                <textarea name="message" id="message" className='form-control' rows="4"
+                value={userThing.message}
+                onChange={onChange}
+                ></textarea>
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-12">
-                <button type='button' className='btn btn-primary w-100'>Envoyer</button>
+                <button type='submit' className='btn btn-primary w-100'>Envoyer</button>
               </div>
             </div>
           </form>
