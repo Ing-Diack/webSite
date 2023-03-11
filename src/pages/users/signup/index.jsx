@@ -27,7 +27,6 @@ function Signup() {
                 console.log(res);
                 setBoxMessage(res.data.message);
                 setTypeMessage('success');
-            
         })
         .catch(error=>{
             console.log(error);
