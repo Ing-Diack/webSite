@@ -29,7 +29,6 @@ function Signup() {
                 setIsLoading(false);
                 setBoxMessage(res.data.message);
                 setTypeMessage('success');
-            
         })
         .catch(error=>{
             setIsLoading(false);
