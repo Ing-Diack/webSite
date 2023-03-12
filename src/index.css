@@ -7,12 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
 }
-body{
-    background-image: url(./assets/backgroundImage1.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
