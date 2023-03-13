@@ -15,19 +15,18 @@ function Header() {
 
   return (
    <header>
-    <nav className='navbar navbar-expand-md  navbar-light  shadow bg-body mb-3 '>
+
+    <nav className='navbar navbar-expand-md mb-2 navbar-light shadow bg-body  ' >
+
         <div className="container">
             <Link to="/" className="navbar-brand text-uppercase fw-bold"   >
               <span>
                <img src={logo} alt="" width={40} height={40}/>
                </span>
             </Link>
-            <button type='button' className='navbar-toggler bg-danger'  data-bs-toggle='collapse' 
+              <i  type='button' data-bs-toggle='collapse' 
             data-bs-target= "#navbarNav"  aria-controls='navbarNav' aria-expanded='false'
-            aria-label= "Toggle Navigation"
-            >
-              <i className="fa fab fa-bars text-light "></i>
-            </button>
+            aria-label= "Toggle Navigation" className=" navbar-toggler fa fab fa-bars fa-1x text-light bg-secondary "></i>
             <div className="collapse navbar-collapse justify-content-end" id='navbarNav'>
               <ul className="navbar-nav">
               <li className="nav-item m-md-2">
@@ -46,7 +45,9 @@ function Header() {
                   {getToken() ? (<Link onClick={handleLogout} className="btn btn-secondary rounded-pill"data-bs-toggle="tooltip" title='LogOut'>
                     <i className="fa fab fa-user" ></i> {getUser().username}
                     </Link> 
-                  ):(<Link to='/login' className='nav-link '  ><i className="fa fa-user"></i> Log In </Link> )}   
+
+                  ):(<Link to='/login' className='nav-link'  > <i className='fa fa-user'></i> Log In </Link> )}   
+
                 </li>
               </ul>
             </div>
