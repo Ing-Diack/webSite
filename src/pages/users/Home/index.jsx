@@ -3,7 +3,7 @@ import axios from 'axios';
 import carousel1  from './../../../assets/carousel4.jpg';
 import cafe  from './../../../assets/cafe3.jpg';
 import code1  from './../../../assets/code1.jpg';
-import diack  from './../../../assets/diack.jpg';
+import diack  from './../../../assets/prof1.jpg';
 import { Link } from 'react-router-dom';
 import {getToken } from '../../../utils/context';
 import carousel2 from './../../../assets/carousel1.jpg';
