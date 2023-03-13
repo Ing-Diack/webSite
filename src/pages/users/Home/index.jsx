@@ -140,7 +140,7 @@ const resetForm =()=>{
                       </small></p>
            </div>
            <div className="col-12 col-md-4 offset-md-1 justify-content-center">
-            <img src={diack} alt=""  className='img-fluid w-100 rounded-3 moi'/>
+            <img src={diack} alt=""  className='w-100 h-100 rounded-3 moi'/>
            </div>
           </div>
         </div>

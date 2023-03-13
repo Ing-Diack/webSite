@@ -15,7 +15,9 @@ function Header() {
 
   return (
    <header>
+
     <nav className='navbar navbar-expand-md mb-2 navbar-light shadow bg-body  ' >
+
         <div className="container">
             <Link to="/" className="navbar-brand text-uppercase fw-bold"   >
               <span>
@@ -31,7 +33,7 @@ function Header() {
                   <Link to='/' className="nav-link">Home</Link>
                 </li>
                 <li className="nav-item m-md-2">
-                 <HashLink to='#section2' className='nav-link'> Qui suis-je ?</HashLink>
+                 <HashLink to='#section2' className='nav-link  '> Qui suis-je ?</HashLink>
                 </li>
                 <li className="nav-item m-md-2">
                 <HashLink to="#section4" className="nav-link">Mes Projets</HashLink>
@@ -40,10 +42,12 @@ function Header() {
                 <HashLink to='#section5' className="nav-link">Contact</HashLink>
                 </li>
                 <li className="nav-item m-md-2"> 
-                  {getToken() ? (<Link onClick={handleLogout} className="btn btn-primary rounded-pill"data-bs-toggle="tooltip" title='LogOut'>
+                  {getToken() ? (<Link onClick={handleLogout} className="btn btn-secondary rounded-pill"data-bs-toggle="tooltip" title='LogOut'>
                     <i className="fa fab fa-user" ></i> {getUser().username}
                     </Link> 
+
                   ):(<Link to='/login' className='nav-link'  > <i className='fa fa-user'></i> Log In </Link> )}   
+
                 </li>
               </ul>
             </div>
