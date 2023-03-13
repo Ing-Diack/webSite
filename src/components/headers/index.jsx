@@ -23,9 +23,8 @@ function Header() {
                </span>
             </Link>
               <i  type='button' data-bs-toggle='collapse' 
-            data-bs-target= "#navbarNav"  aria-controls='navbarNav' aria-expanded='true'
+            data-bs-target= "#navbarNav"  aria-controls='navbarNav' aria-expanded='false'
             aria-label= "Toggle Navigation" className=" navbar-toggler fa fab fa-bars fa-1x text-light bg-secondary "></i>
-            
             <div className="collapse navbar-collapse justify-content-end" id='navbarNav'>
               <ul className="navbar-nav">
               <li className="nav-item m-md-2">
